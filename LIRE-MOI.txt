@@ -1,4 +1,4 @@
-OCTOBRE 1.0 — REFONTE VISUELLE V2 — 22 NOVEMBRE 2026
+OCTOBRE 1.0 — REFONTE VISUELLE V2 + FINITIONS V3 — 22 NOVEMBRE 2026
 ========================================================
 
 DÉMARRAGE RAPIDE
@@ -21,6 +21,8 @@ CE QUI A ÉTÉ REFAIT
 - Menu latéral adapté aux mobiles (bouton menu et fermeture automatique).
 - Écran d'appairage du téléphone entièrement habillé dans le même thème.
 - Apparence claire maintenue ; préférences, états et fonctions conservés.
+- Finitions V3 : boutons à relief, pictogrammes SVG partout (aucun emoji),
+  menus déroulants homogènes et menu rapide « … » dans l'en-tête (Ctrl K).
 
 FICHIERS MODIFIÉS
 - APERCU.html : aperçu complet avec les nouvelles mises en page.
@@ -30,21 +32,35 @@ FICHIERS MODIFIÉS
 
 FICHIERS AJOUTÉS
 - interface/redesign.css : tout le nouveau design, chargé APRÈS identity.css.
-- interface/redesign.js : ouverture et fermeture du menu mobile.
+- interface/theme.css : finitions V3 (boutons, pictogrammes, menus), chargée APRÈS redesign.css.
+- interface/redesign.js : tiroir mobile, menu rapide de l'en-tête et pictogrammes
+  des boutons générés à la volée.
 - apercus/mobile.png : référence visuelle mobile.
+- apercus/menu-rapide.png : le menu rapide ouvert (navigation, apparence).
+- apercus/mobile-menu.png : le tiroir de navigation sur téléphone.
+- apercus/outils-clair.png : les boutons à pictogrammes en apparence claire.
 - DESIGN-V2.md : synthèse technique des changements.
 
 FICHIERS CONSERVÉS
-- interface/app.js, tools.js, identity.js, sphere-engine.js, style.css,
-  identity.css et pair.js : comportement existant inchangé.
+- interface/sphere-engine.js, style.css, identity.css, pair.js : comportement
+  existant inchangé.
+- interface/app.js, tools.js, identity.js : seuls les libellés des boutons
+  (pictogrammes, état de dictée) changent, aucune fonction ni route API.
 - Les sources et licences vendor/grokbot ainsi que references/ sont gardées.
 
 INTÉGRATION DANS OCTOBRE
 Copie les fichiers de interface/ dans le répertoire de fichiers statiques de
 ton installation OCTOBRE, en respectant l'arborescence existante. Assure-toi
-que le serveur sert aussi redesign.css et redesign.js dans /static/.
+que le serveur sert aussi redesign.css, redesign.js et theme.css dans /static/.
 La refonte n'exige pas de compilation ni de bibliothèque JavaScript externe.
 
 Les routes /api/ et les mécanismes de sécurité sont inchangés : aucun accès
 aux données, aux voix ou aux modèles locaux n'a été implémenté par ce kit.
 Les fonctionnalités réelles dépendent du backend déjà présent sur ton PC.
+
+RACCOURCIS DU MENU RAPIDE
+- Ctrl K (ou Cmd K) : ouvrir ou fermer le menu « … » de l'en-tête.
+- 1 à 7 : aller directement à Discussion, Missions, Projets, Studio vocal,
+  Outils, Diagnostic ou Paramètres quand le menu est ouvert.
+- Flèches haut/bas, Début/Fin : parcourir ; Entrée : valider ; Échap : fermer.
+- Le menu propose aussi la bascule d'apparence et « Nouvelle discussion ».

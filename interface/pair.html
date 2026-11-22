@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="/static/style.css">
   <link rel="stylesheet" href="/static/identity.css">
   <link rel="stylesheet" href="/static/redesign.css">
+  <link rel="stylesheet" href="/static/theme.css">
   
   <script src="/static/pair.js" defer></script>
 </head>
@@ -23,7 +24,7 @@
       <p class="muted">Renseignez le code à six chiffres affiché sur votre PC. Il est valable pendant deux minutes.</p>
       <label for="device-name">Nom de votre appareil<input id="device-name" name="device-name" autocomplete="nickname" value="Mon téléphone"></label>
       <label for="pair-code">Code d'association<input id="pair-code" name="pair-code" inputmode="numeric" pattern="[0-9]*" maxlength="6" autocomplete="one-time-code" placeholder="000 000"></label>
-      <button id="pair-button" class="primary">Associer cet appareil ↗</button>
+      <button id="pair-button" class="primary">Associer cet appareil <span class="send-arrow btn-icon icon-arrow" aria-hidden="true"></span></button>
       <p id="pair-result" role="alert" aria-live="polite"></p>
     </section>
   </main>

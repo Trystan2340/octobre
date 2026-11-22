@@ -1,0 +1,730 @@
+/* ========================================================================== */
+/*  OCTOBRE · THEME V3 — boutons, pictogrammes, menus déroulants            */
+/*  Couche purement visuelle, chargée après redesign.css.                   */
+/* ========================================================================== */
+
+body {
+  --chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a8a4b4' stroke-width='2.1' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  --chevron-strong: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23f4d9c8' stroke-width='2.1' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  --check-ink: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2325141d' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5.6 12.6 4.1 4.1L18.6 8'/%3E%3C/svg%3E");
+  --check-ink-color: #25141d;
+  --ico-menu: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 7h16M4 12h16M4 17h11'/%3E%3C/svg%3E");
+  --ico-close: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6.5 6.5l11 11M17.5 6.5l-11 11'/%3E%3C/svg%3E");
+  --ico-plus: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 5.2v13.6M5.2 12h13.6'/%3E%3C/svg%3E");
+  --ico-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 17 17 7M9.2 7H17v7.8'/%3E%3C/svg%3E");
+  --ico-send: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20.4 3.6 3.9 10.2l6.2 2.4 2.4 6.2 7.9-15.2Z'/%3E%3Cpath d='m10.1 12.6 3.9-3.9'/%3E%3C/svg%3E");
+  --ico-mic: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='9' y='2.6' width='6' height='11.4' rx='3'/%3E%3Cpath d='M5.6 11.4a6.4 6.4 0 0 0 12.8 0M12 17.8v3.6M8.6 21.4h6.8'/%3E%3C/svg%3E");
+  --ico-record: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='5.6'/%3E%3C/svg%3E");
+  --ico-capture: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8 3.6H5.6a2 2 0 0 0-2 2V8M16 3.6h2.4a2 2 0 0 1 2 2V8M8 20.4H5.6a2 2 0 0 1-2-2V16M16 20.4h2.4a2 2 0 0 0 2-2V16'/%3E%3Ccircle cx='12' cy='12' r='3.1'/%3E%3C/svg%3E");
+  --ico-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3.2' y='4.6' width='17.6' height='14.8' rx='2.6'/%3E%3Ccircle cx='8.8' cy='9.8' r='1.5'/%3E%3Cpath d='m4.8 17.4 4.4-4.4 3.2 3 3-2.7 3.8 3.4'/%3E%3C/svg%3E");
+  --ico-speaker: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 9.5v5h3.1L11.6 18V6L7.1 9.5H4Z'/%3E%3Cpath d='M15 9.3a4 4 0 0 1 0 5.4M17.6 6.9a7.3 7.3 0 0 1 0 10.2'/%3E%3C/svg%3E");
+  --ico-stop: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='6.4' y='6.4' width='11.2' height='11.2' rx='2.6'/%3E%3Cpath d='M9.6 12h4.8'/%3E%3C/svg%3E");
+  --ico-wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3.4 10.6v2.8M7 7.6v8.8M10.5 4.6v14.8M14 8.6v6.8M17.5 6.6v10.8M20.6 10.6v2.8'/%3E%3C/svg%3E");
+  --ico-link: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9.4 14.6 14.6 9.4'/%3E%3Cpath d='M8.4 11.6 6.1 13.9a4.4 4.4 0 0 0 6.2 6.2l2.3-2.3'/%3E%3Cpath d='M15.6 12.4l2.3-2.3a4.4 4.4 0 0 0-6.2-6.2L9.4 6.2'/%3E%3C/svg%3E");
+  --ico-refresh: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M19.6 12a7.6 7.6 0 1 1-2.2-5.4'/%3E%3Cpath d='M19.8 4.4v4.2h-4.2'/%3E%3C/svg%3E");
+  --ico-search: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='6.4'/%3E%3Cpath d='m15.8 15.8 4.4 4.4'/%3E%3C/svg%3E");
+  --ico-download: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3.8v10.6M8.1 10.7 12 14.6l3.9-3.9'/%3E%3Cpath d='M4.8 19.4h14.4'/%3E%3C/svg%3E");
+  --ico-upload: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 20.2V9.6M8.1 13.3 12 9.4l3.9 3.9'/%3E%3Cpath d='M4.8 4.6h14.4'/%3E%3C/svg%3E");
+  --ico-play: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8.4 5.4 18.2 12 8.4 18.6z'/%3E%3C/svg%3E");
+  --ico-pause: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9.4 5.2v13.6M14.6 5.2v13.6'/%3E%3C/svg%3E");
+  --ico-check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5.6 12.6 4.1 4.1L18.6 8'/%3E%3C/svg%3E");
+  --ico-gear: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='3.2'/%3E%3Cpath d='M12 2.9v2.2M12 18.9v2.2M2.9 12h2.2M18.9 12h2.2M5.6 5.6l1.6 1.6M16.8 16.8l1.6 1.6M18.4 5.6l-1.6 1.6M7.2 16.8l-1.6 1.6'/%3E%3C/svg%3E");
+  --ico-spark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3.2l1.9 5.1 5.1 1.9-5.1 1.9L12 17.2l-1.9-5.1L5 10.2l5.1-1.9z'/%3E%3C/svg%3E");
+  --ico-file: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6.6 3.6h6.9l4.9 4.9v11.9H6.6z'/%3E%3Cpath d='M13.5 3.6v4.9h4.9'/%3E%3C/svg%3E");
+  --ico-folder: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3.4 7.6a2 2 0 0 1 2-2h3.9l2 2h7.3a2 2 0 0 1 2 2v8.4a2 2 0 0 1-2 2H5.4a2 2 0 0 1-2-2z'/%3E%3Cpath d='M3.4 10.4h17.2'/%3E%3C/svg%3E");
+  --ico-clock: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='8.2'/%3E%3Cpath d='M12 7.6v4.9l3.2 1.9'/%3E%3C/svg%3E");
+  --ico-cpu: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='7' y='7' width='10' height='10' rx='2.4'/%3E%3Cpath d='M10 3.4v2.2M14 3.4v2.2M10 18.4v2.2M14 18.4v2.2M3.4 10h2.2M3.4 14h2.2M18.4 10h2.2M18.4 14h2.2'/%3E%3C/svg%3E");
+  --ico-ban: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='8.2'/%3E%3Cpath d='m6.6 17.4 10.8-10.8'/%3E%3C/svg%3E");
+  --ico-list: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8.6 6.8h11M8.6 12h11M8.6 17.2h11'/%3E%3Ccircle cx='4.6' cy='6.8' r='1'/%3E%3Ccircle cx='4.6' cy='12' r='1'/%3E%3Ccircle cx='4.6' cy='17.2' r='1'/%3E%3C/svg%3E");
+  --ico-dots: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='5.6' cy='12' r='1.35'/%3E%3Ccircle cx='12' cy='12' r='1.35'/%3E%3Ccircle cx='18.4' cy='12' r='1.35'/%3E%3C/svg%3E");
+  --ico-sun: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='4'/%3E%3Cpath d='M12 3v2.1M12 18.9V21M3 12h2.1M18.9 12H21M5.6 5.6l1.5 1.5M16.9 16.9l1.5 1.5M18.4 5.6l-1.5 1.5M7.1 16.9l-1.5 1.5'/%3E%3C/svg%3E");
+  --ico-moon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20.1 14.6A8.6 8.6 0 0 1 9.4 3.9a8.6 8.6 0 1 0 10.7 10.7z'/%3E%3C/svg%3E");
+  --ico-trash: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4.6 7.4h14.8M9.4 7.4V5.2h5.2v2.2M6.8 7.4l.8 12.2h8.8l.8-12.2'/%3E%3C/svg%3E");
+  --ico-key: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='8.4' cy='8.4' r='4.2'/%3E%3Cpath d='m11.4 11.4 7.2 7.2M15.6 15.6l1.8-1.8M17.7 17.7l1.8-1.8'/%3E%3C/svg%3E");
+  --ico-shield: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3.2 19 6v5.4c0 4.2-2.8 7.6-7 9.4-4.2-1.8-7-5.2-7-9.4V6z'/%3E%3Cpath d='m8.9 12.1 2.2 2.2 4-4.2'/%3E%3C/svg%3E");
+  --ico-spinner: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3.2a8.8 8.8 0 1 0 8.8 8.8'/%3E%3C/svg%3E");
+  --ico-sparkles: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M11 3.4l1.5 4.1 4.1 1.5-4.1 1.5L11 14.6l-1.5-4.1L5.4 9l4.1-1.5z'/%3E%3Cpath d='M17.6 13.6l.9 2.4 2.4.9-2.4.9-.9 2.4-.9-2.4-2.4-.9 2.4-.9z'/%3E%3C/svg%3E");
+}
+
+body.light {
+  --chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236d6672' stroke-width='2.1' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  --chevron-strong: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23965138' stroke-width='2.1' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  --check-ink: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5.6 12.6 4.1 4.1L18.6 8'/%3E%3C/svg%3E");
+  --check-ink-color: #ffffff;
+}
+
+/* --------------------------------------------------------------------------
+   1. SOCLE — boutons, pictogrammes, anneaux de focus
+   -------------------------------------------------------------------------- */
+body {
+  --v3-ease: cubic-bezier(.22, .8, .3, 1);
+  --v3-ring: 0 0 0 3px #f8b68f1f;
+}
+body.light { --v3-ring: 0 0 0 3px #ad5b3720; }
+
+button { position: relative; border-radius: 10px; }
+button:not(.primary):not(.quick-menu-panel button):hover:not(:disabled) {
+  border-color: #6f6879;
+  box-shadow: inset 0 1px 0 #ffffff08;
+}
+.light button:not(.primary):not(.quick-menu-panel button):hover:not(:disabled) {
+  border-color: #b7a8b1;
+  box-shadow: inset 0 1px 0 #ffffff;
+}
+button:active:not(:disabled) { transform: translateY(1px) scale(.995); }
+
+/* Pictogrammes dessinés en masque : ils prennent toujours la couleur du texte. */
+.btn-icon {
+  display: inline-block;
+  flex: 0 0 15px;
+  width: 15px;
+  height: 15px;
+  background-color: currentColor;
+  -webkit-mask: var(--v3-ico, none) center / contain no-repeat;
+          mask: var(--v3-ico, none) center / contain no-repeat;
+}
+.icon-menu     { --v3-ico: var(--ico-menu); }
+.icon-close    { --v3-ico: var(--ico-close); }
+.icon-plus     { --v3-ico: var(--ico-plus); }
+.icon-arrow    { --v3-ico: var(--ico-arrow); }
+.icon-send     { --v3-ico: var(--ico-send); }
+.icon-mic      { --v3-ico: var(--ico-mic); }
+.icon-record   { --v3-ico: var(--ico-record); }
+.icon-capture  { --v3-ico: var(--ico-capture); }
+.icon-image    { --v3-ico: var(--ico-image); }
+.icon-speaker  { --v3-ico: var(--ico-speaker); }
+.icon-stop     { --v3-ico: var(--ico-stop); }
+.icon-wave     { --v3-ico: var(--ico-wave); }
+.icon-link     { --v3-ico: var(--ico-link); }
+.icon-refresh  { --v3-ico: var(--ico-refresh); }
+.icon-search   { --v3-ico: var(--ico-search); }
+.icon-download { --v3-ico: var(--ico-download); }
+.icon-upload   { --v3-ico: var(--ico-upload); }
+.icon-check    { --v3-ico: var(--ico-check); }
+.icon-key      { --v3-ico: var(--ico-key); }
+.icon-list     { --v3-ico: var(--ico-list); }
+.icon-spark    { --v3-ico: var(--ico-spark); }
+.icon-spinner  { --v3-ico: var(--ico-spinner); }
+.icon-moon     { --v3-ico: var(--ico-moon); }
+.icon-sun      { --v3-ico: var(--ico-sun); }
+.icon-dots     { --v3-ico: var(--ico-dots); }
+.icon-play     { --v3-ico: var(--ico-play); }
+.icon-pause    { --v3-ico: var(--ico-pause); }
+.icon-ban      { --v3-ico: var(--ico-ban); }
+.icon-trash    { --v3-ico: var(--ico-trash); }
+.icon-gear     { --v3-ico: var(--ico-gear); }
+.icon-file     { --v3-ico: var(--ico-file); }
+.icon-folder   { --v3-ico: var(--ico-folder); }
+.icon-clock    { --v3-ico: var(--ico-clock); }
+.icon-cpu      { --v3-ico: var(--ico-cpu); }
+.icon-shield   { --v3-ico: var(--ico-shield); }
+.icon-interrupt { --v3-ico: var(--ico-stop); }
+
+button:has(> .btn-icon) { display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+button:has(> .btn-icon) > .btn-icon { pointer-events: none; }
+.toolbar > button:has(> .btn-icon) { min-width: 0; }
+
+@keyframes v3-spin { to { transform: rotate(1turn); } }
+
+/* --------------------------------------------------------------------------
+   2. BOUTON PRINCIPAL — relief cuivré
+   -------------------------------------------------------------------------- */
+button.primary,
+.light button.primary {
+  background: linear-gradient(145deg, var(--accent-soft) 0%, var(--accent) 58%, #e89d74 100%);
+  border: 1px solid #ffc9a8;
+  box-shadow: 0 10px 24px #f8b68f1f, inset 0 1px 0 #ffffffb3, inset 0 -8px 14px #b5654024;
+  letter-spacing: .01em;
+}
+.light button.primary {
+  border-color: #d99979;
+  box-shadow: 0 9px 20px #ad5b371f, inset 0 1px 0 #ffffff8c;
+}
+button.primary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(118deg, #ffffff59 0%, #ffffff12 32%, transparent 55%);
+  pointer-events: none;
+}
+button.primary:hover:not(:disabled),
+.light button.primary:hover:not(:disabled) {
+  background: linear-gradient(145deg, #ffe2cb 0%, var(--accent-soft) 60%, var(--accent) 100%);
+  box-shadow: 0 14px 30px #f8b68f2e, inset 0 1px 0 #ffffffd9;
+  transform: translateY(-1px);
+}
+button.primary:active:not(:disabled) {
+  transform: translateY(1px) scale(.995);
+  box-shadow: 0 4px 12px #f8b68f24, inset 0 2px 6px #8a4a2b2e;
+}
+button.primary .btn-icon { color: var(--accent-ink); }
+
+/* --------------------------------------------------------------------------
+   3. RAIL LATÉRAL — pictogrammes sur pastille
+   -------------------------------------------------------------------------- */
+#new-chat {
+  justify-content: flex-start;
+  gap: 10px;
+  min-height: 48px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  white-space: nowrap;
+}
+#new-chat .new-chat-plus {
+  display: inline-grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  flex: 0 0 22px;
+  margin-left: -2px;
+  border: 0;
+  border-radius: 6px;
+  font-size: 0;
+  background: var(--accent-ink);
+  -webkit-mask: var(--ico-plus-mask) center / 13px 13px no-repeat;
+          mask: var(--ico-plus-mask) center / 13px 13px no-repeat;
+  opacity: .9;
+}
+#new-chat > span:not(.new-chat-plus):not(.new-chat-shortcut) { margin-inline: auto; }
+#new-chat .new-chat-shortcut {
+  margin-left: 0;
+  width: 14px;
+  height: 14px;
+  flex-basis: 14px;
+  color: var(--accent-ink);
+  opacity: .55;
+  transition: opacity .2s var(--v3-ease), transform .2s var(--v3-ease);
+}
+#new-chat:hover .new-chat-shortcut { opacity: .95; transform: translate(1px, -1px); }
+
+.sidebar nav button { min-height: 44px; padding: 7px 10px; gap: 11px; border-radius: 10px; }
+.sidebar nav button .nav-icon-wrap {
+  width: 30px;
+  height: 30px;
+  flex: 0 0 30px;
+  display: inline-grid;
+  place-items: center;
+  margin-left: -3px;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  background: transparent;
+  transition: background .2s var(--v3-ease), border-color .2s var(--v3-ease), color .2s var(--v3-ease);
+}
+.sidebar nav button .nav-icon { width: 17px; height: 17px; }
+.sidebar nav button:hover .nav-icon-wrap {
+  background: #ffffff08;
+  border-color: var(--line-soft);
+}
+.light .sidebar nav button:hover .nav-icon-wrap {
+  background: #ffffffb3;
+  border-color: var(--line);
+}
+.sidebar nav button.active .nav-icon-wrap {
+  background: linear-gradient(150deg, #f8b68f2e, #f8b68f0d);
+  border-color: #f8b68f3d;
+  box-shadow: inset 0 1px 0 #ffffff1f;
+}
+.light .sidebar nav button.active .nav-icon-wrap {
+  background: linear-gradient(150deg, #ad5b371f, #ad5b3708);
+  border-color: #ad5b3740;
+}
+.sidebar nav button.active .nav-icon-wrap .nav-icon { stroke-width: 1.85; }
+
+/* --------------------------------------------------------------------------
+   4. EN-TÊTE — contrôles, bouton icône, menu rapide
+   -------------------------------------------------------------------------- */
+.header-actions { gap: 10px; }
+.voice-picker {
+  gap: 8px;
+  padding: 5px 5px 5px 11px;
+  border-radius: 11px;
+  background: linear-gradient(180deg, #ffffff07, transparent 70%), var(--panel);
+  box-shadow: inset 0 1px 0 #ffffff0a;
+}
+.light .voice-picker { background: var(--panel); box-shadow: inset 0 1px 0 #ffffff; }
+.voice-picker-icon { width: 14px; height: 14px; flex-basis: 14px; color: var(--accent); }
+.voice-picker select, .light .voice-picker select {
+  min-height: 30px;
+  border-radius: 8px;
+  background-color: transparent;
+  background-position: right 7px center;
+  padding: 4px 27px 4px 4px;
+}
+.voice-picker select:hover { color: var(--accent); }
+
+.status-shell {
+  border-radius: 11px;
+  background: linear-gradient(180deg, #ffffff07, transparent 70%), var(--surface);
+  box-shadow: inset 0 1px 0 #ffffff0a;
+}
+.light .status-shell { background: var(--panel); box-shadow: inset 0 1px 0 #ffffff; }
+.status-led { position: relative; }
+.status-led::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1px solid #f8b68f42;
+  animation: v3-ping 3.2s var(--v3-ease) infinite;
+}
+@keyframes v3-ping {
+  0% { transform: scale(.6); opacity: 0; }
+  28% { opacity: .85; }
+  100% { transform: scale(1.7); opacity: 0; }
+}
+
+.icon-button,
+.mascot-button,
+.light .mascot-button {
+  display: inline-grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  padding: 3px;
+  border-radius: 13px;
+  border: 1px solid #5b4b54;
+  background: linear-gradient(150deg, #232433, #171823);
+  color: var(--text);
+  box-shadow: inset 0 1px 0 #ffffff0f, 0 6px 18px #04030a33;
+}
+.light .icon-button,
+.light .mascot-button { background: var(--panel); border-color: var(--line); box-shadow: inset 0 1px 0 #ffffff; }
+.icon-button:hover,
+.mascot-button:hover { border-color: var(--accent); background: var(--tint); }
+.icon-button[aria-expanded="true"] { border-color: var(--accent); background: var(--tint); box-shadow: var(--v3-ring); }
+.icon-button-glyph {
+  width: 17px;
+  height: 17px;
+  background: currentColor;
+  -webkit-mask: var(--ico-dots) center / contain no-repeat;
+          mask: var(--ico-dots) center / contain no-repeat;
+  transition: transform .2s var(--v3-ease);
+}
+.icon-button[aria-expanded="true"] .icon-button-glyph {
+  -webkit-mask-image: var(--ico-close);
+          mask-image: var(--ico-close);
+  transform: rotate(90deg);
+}
+
+@supports not selector(:has(a)) {
+  .composer-actions button > .btn-icon { margin-right: 6px; }
+  .composer-actions label > .btn-icon { margin-inline: 2px 4px; }
+}
+.quick-menu { position: relative; display: inline-flex; }
+.quick-menu-panel {
+  position: absolute;
+  z-index: 34;
+  top: calc(100% + 11px);
+  right: 0;
+  width: 262px;
+  padding: 7px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: linear-gradient(180deg, #1a1b27, #14151f);
+  box-shadow: 0 28px 64px #02010a80, inset 0 1px 0 #ffffff0f;
+  transform-origin: top right;
+  animation: v3-menu-in .18s var(--v3-ease) both;
+}
+.light .quick-menu-panel {
+  background: #fffdfc;
+  border-color: var(--line);
+  box-shadow: 0 24px 54px #4b3a4029, inset 0 1px 0 #ffffff;
+}
+.quick-menu-panel[hidden] { display: none; }
+@keyframes v3-menu-in {
+  from { opacity: 0; transform: translateY(-7px) scale(.97); }
+}
+.quick-menu-heading {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  align-items: baseline;
+  margin: 7px 11px 8px;
+  color: var(--text);
+  font-size: 9px;
+  font-weight: 760;
+  letter-spacing: .16em;
+}
+.quick-menu-heading span { color: var(--muted); font-weight: 600; letter-spacing: .02em; }
+.quick-menu-panel button {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  width: 100%;
+  min-height: 36px;
+  padding: 7px 11px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text);
+  font-size: 12.5px;
+  font-weight: 520;
+  text-align: left;
+}
+.quick-menu-panel button:hover:not(:disabled),
+.quick-menu-panel button:focus-visible {
+  background: var(--tint);
+  border-color: #f8b68f2b;
+  transform: none;
+}
+.light .quick-menu-panel button:hover:not(:disabled),
+.light .quick-menu-panel button:focus-visible { border-color: #ad5b3733; }
+.quick-menu-panel .nav-icon {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  color: var(--muted);
+  transition: color .18s var(--v3-ease);
+}
+.quick-menu-panel button:hover .nav-icon,
+.quick-menu-panel button:focus-visible .nav-icon { color: var(--accent); }
+.quick-menu-panel button[aria-current="true"] { color: var(--accent); }
+.quick-menu-panel button[aria-current="true"] .nav-icon { color: var(--accent); }
+.quick-menu-panel button[aria-current="true"]::after {
+  content: "";
+  width: 5px;
+  height: 5px;
+  margin-left: auto;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 9px #f8b68f73;
+}
+.quick-menu-shortcut {
+  margin-left: auto;
+  color: #6f6b7b;
+  font-size: 9.5px;
+  letter-spacing: .08em;
+  font-variant-numeric: tabular-nums;
+}
+.quick-menu-panel button[aria-current="true"] .quick-menu-shortcut { display: none; }
+.light .quick-menu-shortcut { color: #9a9099; }
+.quick-menu-separator { height: 1px; margin: 6px 7px; background: var(--line-soft); }
+.quick-menu-copy { min-width: 0; }
+.only-light { display: none; }
+body.light .only-light { display: inline-block; }
+body.light .only-dark { display: none; }
+
+/* --------------------------------------------------------------------------
+   5. MENUS DÉROULANTS NATIFS — déclencheur soigné
+   -------------------------------------------------------------------------- */
+select:not([multiple]) {
+  appearance: none;
+  -webkit-appearance: none;
+  min-height: 38px;
+  padding: 8px 34px 8px 11px;
+  border-radius: 10px;
+  background-color: var(--panel);
+  background-image: var(--chevron);
+  background-repeat: no-repeat;
+  background-position: right 11px center;
+  background-size: 15px 15px;
+  cursor: pointer;
+  transition: border-color .17s var(--v3-ease), background-color .17s var(--v3-ease), box-shadow .17s var(--v3-ease);
+}
+select:not([multiple]):hover:not(:disabled) { border-color: #736a7e; }
+.light select:not([multiple]):hover:not(:disabled) { border-color: #b8a8b2; }
+select:not([multiple]):focus-visible {
+  border-color: var(--accent);
+  box-shadow: var(--v3-ring);
+}
+select:not([multiple]):disabled { opacity: .5; cursor: default; }
+select:not([multiple]):not(:has(> option)) { background-image: none; padding-right: 11px; }
+select option,
+select optgroup { background: var(--panel); color: var(--text); }
+
+.composer-actions select,
+.light .composer-actions select {
+  min-height: 37px;
+  border-radius: 9px;
+  background-color: #ffffff08;
+  border: 1px solid #ffffff17;
+  background-image: var(--chevron);
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 14px 14px;
+  padding: 8px 28px 8px 10px;
+}
+.light .composer-actions select { background-color: #f7f5f4; border-color: var(--line); }
+.composer-actions select:hover { border-color: #e6b19680; }
+.voice-picker select,
+.voice-picker select:not([multiple]) { padding-right: 27px; background-repeat: no-repeat; }
+.preview-control select { min-height: 34px; font-size: 12px; padding: 6px 30px 6px 10px; background-repeat: no-repeat; }
+.setting-row select { min-height: 37px; background-repeat: no-repeat; }
+
+/* Casques à cocher et pastilles radio */
+input[type="checkbox"] {
+  appearance: none;
+  padding: 0;
+  -webkit-appearance: none;
+  display: inline-grid;
+  place-items: center;
+  width: 17px;
+  height: 17px;
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: var(--surface);
+  cursor: pointer;
+  transition: background .16s var(--v3-ease), border-color .16s var(--v3-ease), box-shadow .16s var(--v3-ease);
+  vertical-align: -3px;
+}
+input[type="checkbox"]:hover { border-color: #7a7185; }
+.light input[type="checkbox"]:hover { border-color: #b8a8b2; }
+input[type="checkbox"]:checked {
+  border-color: var(--accent);
+  background: var(--accent);
+  box-shadow: inset 0 1px 0 #ffffff38;
+}
+input[type="checkbox"]:checked::after {
+  content: "";
+  width: 12px;
+  height: 12px;
+  background-color: var(--check-ink-color);
+  -webkit-mask: var(--check-ink) center / contain no-repeat;
+          mask: var(--check-ink) center / contain no-repeat;
+}
+input[type="range"] { accent-color: var(--accent); }
+
+/* --------------------------------------------------------------------------
+   6. BARRE DE SAISIE — outils alignés
+   -------------------------------------------------------------------------- */
+.composer { border-radius: 18px; }
+.composer:focus-within { box-shadow: 0 16px 60px #03020b35, 0 0 0 3px #f8b68f14; }
+.light .composer:focus-within { box-shadow: 0 12px 40px #4b3a4014, 0 0 0 3px #ad5b3714; }
+.composer-actions { gap: 8px; }
+.composer-actions > div { gap: 5px; }
+.composer-actions button:not(.primary) {
+  gap: 7px;
+  border-radius: 9px;
+  color: var(--text);
+}
+.composer-actions .btn-icon { width: 14px; height: 14px; flex-basis: 14px; color: var(--muted); transition: color .18s var(--v3-ease); }
+.composer-actions label { color: var(--muted); transition: color .18s var(--v3-ease); }
+.light .composer-actions label { color: var(--text); }
+.composer-actions button:hover .btn-icon { color: var(--accent); }
+.composer { --pill: #ffffff05; }
+.composer-actions label:has(#auto-speech) {
+  align-self: stretch;
+  background: #ffffff05;
+  min-height: 37px;
+  padding: 0 10px;
+  border: 1px solid #ffffff17;
+  border-radius: 9px;
+  background: #ffffff05;
+  color: var(--muted);
+  font-size: 11px;
+  transition: border-color .18s var(--v3-ease), background .18s var(--v3-ease), color .18s var(--v3-ease);
+}
+.composer-actions label:has(#auto-speech) .btn-icon { color: var(--muted); }
+.composer-actions label:has(#auto-speech):hover { border-color: #e6b19680; color: var(--text); }
+.composer-actions label:has(#auto-speech:checked) {
+  border-color: #f8b68f4d;
+  background: var(--tint);
+  color: var(--text);
+}
+.composer-actions label:has(#auto-speech:checked) .btn-icon { color: var(--accent); }
+.light .composer-actions label:has(#auto-speech) { background: #f8f6f5; border-color: var(--line); }
+#send { gap: 9px; }
+#send .send-arrow {
+  width: 15px;
+  height: 15px;
+  margin: 0;
+  padding: 0;
+  flex-basis: 15px;
+  font-size: 0;
+  transition: transform .2s var(--v3-ease);
+}
+#send:hover .send-arrow { transform: translate(1px, -1px); }
+
+#microphone[data-action="recording"] { border-color: #f2727266 !important; background: #f2727214 !important; color: var(--text); }
+#microphone[data-action="recording"] .btn-icon { color: #f88f83; }
+#microphone[data-action="recording"] .btn-icon,
+#microphone[data-action="idle"] .btn-icon { -webkit-mask-image: var(--ico-record); mask-image: var(--ico-record); }
+#microphone[data-action="idle"] .btn-icon { -webkit-mask-image: var(--ico-mic); mask-image: var(--ico-mic); }
+#microphone[data-action="transcribing"] .btn-icon { -webkit-mask-image: var(--ico-spinner); mask-image: var(--ico-spinner); animation: v3-spin 1s linear infinite; }
+
+/* --------------------------------------------------------------------------
+   7. PAGES — menus repliables et cartes de réglage
+   -------------------------------------------------------------------------- */
+details:not(.activity) > summary {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  list-style: none;
+}
+details:not(.activity) > summary::-webkit-details-marker { display: none; }
+details:not(.activity) > summary::before {
+  content: "";
+  width: 13px;
+  height: 13px;
+  flex: 0 0 13px;
+  background: currentColor;
+  opacity: .6;
+  -webkit-mask: var(--chevron) center / contain no-repeat;
+          mask: var(--chevron) center / contain no-repeat;
+  transform: rotate(-90deg);
+  transition: transform .18s var(--v3-ease), opacity .18s var(--v3-ease);
+}
+details[open]:not(.activity) > summary::before { transform: rotate(0deg); opacity: 1; color: var(--accent); }
+
+.activity summary { gap: 9px; border-radius: 10px; }
+.activity-chevron {
+  width: 14px;
+  height: 14px;
+  flex: 0 0 14px;
+  font-size: 0;
+  background: currentColor;
+  opacity: .55;
+  -webkit-mask: var(--chevron) center / contain no-repeat;
+          mask: var(--chevron) center / contain no-repeat;
+  transition: transform .18s var(--v3-ease), opacity .18s var(--v3-ease);
+}
+.activity .activity-chevron { transform: rotate(-90deg); }
+.activity[open] .activity-chevron { transform: rotate(0deg); opacity: .95; color: var(--accent); }
+.activity summary:hover .activity-chevron { opacity: .95; }
+
+.style-options label { border-radius: 11px; transition: border-color .18s var(--v3-ease), background .18s var(--v3-ease), transform .18s var(--v3-ease); }
+.style-options label:hover { border-color: #6f6879; }
+.light .style-options label:hover { border-color: #b8a8b2; }
+.style-options label:has(:checked) { box-shadow: inset 0 0 0 1px #f8b68f33; }
+.light .style-options label:has(:checked) { box-shadow: inset 0 0 0 1px #ad5b3726; }
+.style-options input[type="radio"] {
+  appearance: none;
+  padding: 0;
+  -webkit-appearance: none;
+  display: inline-grid;
+  place-items: center;
+  width: 17px;
+  height: 17px;
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--surface);
+  cursor: pointer;
+  transition: border-color .16s var(--v3-ease), background .16s var(--v3-ease);
+}
+.style-options input[type="radio"]:checked { border-color: var(--accent); background: var(--accent); }
+.style-options input[type="radio"]:checked::after {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--check-ink-color);
+}
+.style-options label:has(:checked) .style-swatch { box-shadow: 0 0 0 2px var(--panel), 0 0 0 3.5px #f8b68f8c; }
+.light .style-options label:has(:checked) .style-swatch { box-shadow: 0 0 0 2px var(--panel), 0 0 0 3.5px #ad5b3780; }
+
+.settings-page .toolbar { border-radius: 15px; }
+#mascot-reset { gap: 8px; }
+
+/* --------------------------------------------------------------------------
+   8. MOBILE — cibles tactiles et boutons icône compacts
+   -------------------------------------------------------------------------- */
+.menu-glyph {
+  width: 17px;
+  height: 17px;
+  background: currentColor;
+  -webkit-mask: var(--ico-menu) center / contain no-repeat;
+          mask: var(--ico-menu) center / contain no-repeat;
+}
+#mobile-menu[aria-expanded="true"] .menu-glyph {
+  -webkit-mask-image: var(--ico-close);
+          mask-image: var(--ico-close);
+}
+
+@media (max-width: 760px) {
+  .sidebar nav button .nav-icon-wrap { width: 28px; height: 28px; flex-basis: 28px; border-radius: 8px; }
+  .sidebar nav button .nav-icon { width: 16px; height: 16px; }
+  .icon-button, .mascot-button, .light .mascot-button { width: 34px; height: 34px; border-radius: 10px; }
+  .icon-button-glyph { width: 15px; height: 15px; }
+  .quick-menu-panel {
+    position: fixed;
+    top: 64px;
+    right: 12px;
+    left: auto;
+    width: min(272px, calc(100vw - 24px));
+  }
+  .quick-menu-panel button { min-height: 40px; font-size: 13px; }
+  .composer-actions .btn-icon { width: 13px; height: 13px; flex-basis: 13px; }
+  .composer-actions > div { margin-top: 7px; }
+  .composer-actions label:has(#auto-speech) { min-height: 31px; padding-inline: 8px; }
+  .composer-actions button:not(.primary) { gap: 5px; }
+  .voice-picker select, .voice-picker select:not([multiple]) { min-height: 26px; }
+}
+@media (max-width: 425px) {
+  .composer-actions button:not(.primary) { padding-inline: 8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .status-led::after { animation: none; opacity: 0; }
+  .quick-menu-panel { animation: none; }
+  #microphone[data-action="transcribing"] .btn-icon { animation: none; }
+}
+
+/* Bascule d'apparence : soleil en mode sombre, lune en mode clair */
+.quick-menu-panel .nav-icon.theme-icon-moon { display: none; }
+body.light .quick-menu-panel .nav-icon.theme-icon-sun { display: none; }
+body.light .quick-menu-panel .nav-icon.theme-icon-moon { display: block; }
+.quick-menu-panel button[data-quick="theme"] .nav-icon,
+.quick-menu-panel button[data-quick="new-chat"] .nav-icon { color: var(--muted); }
+
+/* Nouvelle discussion : pictogramme au trait, affiné aux petits écrans */
+@media (max-width: 760px) {
+  #new-chat .new-chat-plus { width: 20px; height: 20px; flex-basis: 20px; -webkit-mask-size: 13px 13px; mask-size: 13px 13px; }
+}
+
+/* Pictogrammes en masque supplémentaires (prennent la couleur du texte) */
+body {
+  --ico-plus-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 5.2v13.6M5.2 12h13.6'/%3E%3C/svg%3E");
+  --ico-moon-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20.1 14.6A8.6 8.6 0 0 1 9.4 3.9a8.6 8.6 0 1 0 10.7 10.7z'/%3E%3C/svg%3E");
+  --ico-sun-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='4'/%3E%3Cpath d='M12 3v2.1M12 18.9V21M3 12h2.1M18.9 12H21M5.6 5.6l1.5 1.5M16.9 16.9l1.5 1.5M18.4 5.6l-1.5 1.5M7.1 16.9l-1.5 1.5'/%3E%3C/svg%3E");
+  --ico-spark-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3.2l1.9 5.1 5.1 1.9-5.1 1.9L12 17.2l-1.9-5.1L5 10.2l5.1-1.9z'/%3E%3Cpath d='M18.4 16.2l.6 1.6 1.6.6-1.6.6-.6 1.6-.6-1.6-1.6-.6 1.6-.6z'/%3E%3C/svg%3E");
+}
+
+/* Le titre reçoit le focus à chaque changement de page (annonce lecteur d'écran) :
+   on retire l'anneau système, l'état actif reste signalé par la navigation. */
+#page-title:focus,
+#page-title:focus-visible { outline: none; }
+
+/* Historique : jamais de barre horizontale, même avec un titre très long */
+.history button { max-width: 100%; }
+
+/* --- Historique : rangées compactes et tronquées -------------------------- */
+#conversations.history { display: block; overflow-x: hidden; overflow-y: auto; padding: 0 0 10px; }
+#conversations button,
+.light #conversations button {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-height: 34px;
+  padding: 9px 12px;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  background: transparent;
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#conversations button:hover,
+.light #conversations button:hover { color: var(--text); background: #ffffff06; border-color: var(--line-soft); }
+.light #conversations button:hover { background: #ffffffcc; }
+#conversations button[aria-current="true"],
+.light #conversations button[aria-current="true"] {
+  color: var(--text);
+  background: var(--tint);
+  border-color: #f8b68f1f;
+}
+.light #conversations button[aria-current="true"] { border-color: #ad5b3722; }
+#conversations button[aria-current="true"]::before { content: none; }
+#conversations button[aria-current="true"]::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 30%;
+  bottom: 30%;
+  width: 2px;
+  border-radius: 2px;
+  background: var(--accent);
+}
+#conversations button { position: relative; }

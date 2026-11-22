@@ -180,7 +180,7 @@
         <span class="activity-indicator" aria-hidden="true"><i></i><i></i><i></i></span>
         <span class="activity-label" role="status"></span>
         <span class="activity-time" aria-hidden="true"></span>
-        <span class="activity-chevron" aria-hidden="true">›</span>
+        <span class="activity-chevron" aria-hidden="true"></span>
       </summary>
       <ol class="activity-steps" aria-label="Étapes de la demande"></ol>`;
     const label = details.querySelector('.activity-label');
