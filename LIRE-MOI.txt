@@ -1,0 +1,50 @@
+OCTOBRE 1.0 — REFONTE VISUELLE V2 — 22 NOVEMBRE 2026
+========================================================
+
+DÉMARRAGE RAPIDE
+1. Décompresse toute cette archive dans un dossier.
+2. Ouvre APERCU.html dans Edge ou Chrome (ou Firefox).
+3. Parcours les écrans, choisis des styles de mascotte et teste les boutons.
+4. Pour tester la page du téléphone, ouvre APPAIRAGE.html.
+
+IMPORTANT : APERCU.html et APPAIRAGE.html utilisent des données fictives.
+Les moteurs IA, la transcription, les voix réelles et les opérations sur les
+fichiers nécessitent OCTOBRE et son serveur local. Ils ne sont pas inclus.
+
+CE QUI A ÉTÉ REFAIT
+- Identité visuelle sombre graphite / cuivre / lavande ; contraste amélioré.
+- Navigation avec pictogrammes SVG, état actif et historique restructuré.
+- Nouvel accueil éditorial avec mascotte sphérique, orbites et trois raccourcis.
+- Barre de saisie repensée, choix des modes et contrôles conservés.
+- Mise en forme harmonisée pour Missions, Projets, Studio vocal, Outils,
+  Diagnostic et Paramètres (dont la galerie des styles de mascotte).
+- Menu latéral adapté aux mobiles (bouton menu et fermeture automatique).
+- Écran d'appairage du téléphone entièrement habillé dans le même thème.
+- Apparence claire maintenue ; préférences, états et fonctions conservés.
+
+FICHIERS MODIFIÉS
+- APERCU.html : aperçu complet avec les nouvelles mises en page.
+- APPAIRAGE.html : aperçu du nouvel écran d'association.
+- interface/index.html : HTML correspondant à l'interface réelle.
+- interface/pair.html : écran d'association côté interface réelle.
+
+FICHIERS AJOUTÉS
+- interface/redesign.css : tout le nouveau design, chargé APRÈS identity.css.
+- interface/redesign.js : ouverture et fermeture du menu mobile.
+- apercus/mobile.png : référence visuelle mobile.
+- DESIGN-V2.md : synthèse technique des changements.
+
+FICHIERS CONSERVÉS
+- interface/app.js, tools.js, identity.js, sphere-engine.js, style.css,
+  identity.css et pair.js : comportement existant inchangé.
+- Les sources et licences vendor/grokbot ainsi que references/ sont gardées.
+
+INTÉGRATION DANS OCTOBRE
+Copie les fichiers de interface/ dans le répertoire de fichiers statiques de
+ton installation OCTOBRE, en respectant l'arborescence existante. Assure-toi
+que le serveur sert aussi redesign.css et redesign.js dans /static/.
+La refonte n'exige pas de compilation ni de bibliothèque JavaScript externe.
+
+Les routes /api/ et les mécanismes de sécurité sont inchangés : aucun accès
+aux données, aux voix ou aux modèles locaux n'a été implémenté par ce kit.
+Les fonctionnalités réelles dépendent du backend déjà présent sur ton PC.

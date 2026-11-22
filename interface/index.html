@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OCTOBRE 1.0</title><link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="/static/identity.css"><link rel="stylesheet" href="/static/redesign.css">
+  <script src="/static/sphere-engine.js" defer></script>
+  <script src="/static/identity.js" defer></script>
+  <script src="/static/redesign.js" defer></script><script src="/static/app.js" defer></script><script src="/static/tools.js" defer></script>
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand" aria-label="OCTOBRE par FREEV"><span class="brand-mark" aria-hidden="true"><span class="mark-core">✳</span></span><div class="brand-label"><span>OCTOBRE</span><small>UN PROJET FREEV <span class="brand-suffix">/ 1.0</span></small></div></div>
+    <button id="new-chat" class="primary"><span class="new-chat-plus" aria-hidden="true">+</span><span>Nouvelle discussion</span><span class="new-chat-shortcut" aria-hidden="true">↗</span></button>
+    <div class="sidebar-section-label">ESPACE DE TRAVAIL <span>01</span></div>
+    <nav aria-label="Navigation principale">
+      <button data-page="chat" class="active" aria-current="page"><span class="nav-icon-wrap" aria-hidden="true"><svg class="nav-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M8 12h8M12 8v8"/></svg></span><span>Discussion</span></button>
+      <button data-page="missions"><span class="nav-icon-wrap" aria-hidden="true"><svg class="nav-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="m8 12 2.5 2.5L16 9"/></svg></span><span>Missions</span></button>
+      <button data-page="projects"><span class="nav-icon-wrap" aria-hidden="true"><svg class="nav-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M3 10h18"/></svg></span><span>Projets et fichiers</span></button>
+      <button data-page="voices"><span class="nav-icon-wrap" aria-hidden="true"><svg class="nav-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><rect x="9" y="2" width="6" height="13" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v4M8 22h8"/></svg></span><span>Studio vocal</span></button>
+      <button data-page="tools"><span class="nav-icon-wrap" aria-hidden="true"><svg class="nav-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m14.7 6.3 3 3M5 21l4.5-4.5"/><path d="M12.5 7.5a6 6 0 0 1 7.8-5.3L17 5.5l1.5 2L22 6a6 6 0 0 1-7.5 6.4L6.3 20.6a2 2 0 0 1-2.8-2.8z"/></svg></span><span>Outils</span></button>
+      <button data-page="health"><span class="nav-icon-wrap" aria-hidden="true"><svg class="nav-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h3l3-6 4 12 3-6h5"/></svg></span><span>Diagnostic</span></button>
+      <button data-page="settings"><span class="nav-icon-wrap" aria-hidden="true"><svg class="nav-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/><path d="M20 12a8 8 0 0 0-.2-1.8L22 8l-2-3-2.9 1a8 8 0 0 0-2.1-1.2L14.5 2h-4l-.6 2.8A8 8 0 0 0 7.8 6L5 5 3 8l2.2 2.2a8 8 0 0 0 0 3.6L3 16l2 3 2.8-1a8 8 0 0 0 2.1 1.2l.6 2.8h4l.5-2.8a8 8 0 0 0 2.1-1.2l2.9 1 2-3-2.2-2.2A8 8 0 0 0 20 12z"/></svg></span><span>Paramètres</span></button>
+    </nav>
+    <div class="sidebar-section-label history-label">HISTORIQUE <span>02</span></div><div id="conversations" class="history" aria-label="Historique des discussions"></div>
+    <div class="sidebar-bottom"><div class="local-symbol" aria-hidden="true">⌁</div><div class="local-copy"><strong>Sur cet appareil</strong><small>OCTOBRE 1.0 • FREEV LOCAL</small></div><span class="local-led" aria-hidden="true"></span></div>
+  </aside>
+  <main>
+    <header class="app-header">
+      <div class="header-title-wrap"><button id="mobile-menu" class="mobile-menu" type="button" aria-label="Ouvrir le menu" aria-expanded="false">☰</button><div><span class="eyebrow"><span class="breadcrumb-accent">FREEV LOCAL</span><span class="breadcrumb-slash"> / </span> ESPACE PERSONNEL</span><h1 id="page-title" tabindex="-1">Discussion</h1></div></div>
+      <div class="header-actions">
+        <label class="voice-picker"><span class="voice-picker-label">VOIX ACTIVE</span><select id="voice-select" aria-label="Voix active"><option value="voice_female">Féminine</option><option value="voice_male">Masculine</option></select></label>
+        <div class="status-shell"><span class="status-led" aria-hidden="true"></span><span id="status" role="status">Connexion…</span></div>
+        <button class="mascot-button" data-page="settings" aria-label="Personnaliser la mascotte" title="Personnaliser la mascotte"><octobre-mascot aria-hidden="true"></octobre-mascot></button>
+      </div>
+    </header>
+    <div id="notice" role="alert" class="notice hidden"></div>
+    <section id="page-chat" class="page chat-page">
+      <div id="messages" aria-label="Discussion"></div>
+      <template id="welcome-template">
+<div class="welcome">
+  <div class="welcome-intro">
+    <div class="welcome-kicker"><span class="kicker-dash"></span> VOTRE ESPACE DE CRÉATION</div>
+    <h2>Laissez vos idées<br><em>prendre forme.</em></h2>
+    <p class="welcome-description">Une idée à explorer, un projet à construire, un problème à résoudre ? Octobre vous accompagne, directement depuis votre ordinateur.</p>
+    <div class="welcome-trust"><span class="trust-symbol" aria-hidden="true">✦</span><span>Votre espace de travail local</span><span class="trust-separator" aria-hidden="true"></span><span>À votre rythme</span></div>
+  </div>
+  <div class="welcome-scene" aria-hidden="true">
+    <div class="scene-grid"></div><div class="scene-orbit scene-orbit-primary"></div><div class="scene-orbit scene-orbit-secondary"></div>
+    <span class="scene-star star-a"></span><span class="scene-star star-b"></span><span class="scene-star star-c"></span>
+    <octobre-mascot></octobre-mascot>
+    <div class="scene-caption"><span class="scene-caption-mark">✧</span> OCTOBRE <span class="scene-caption-index">/ 01</span></div>
+  </div>
+  <div class="welcome-suggestions">
+    <div class="suggestions-heading"><span>COMMENCER AVEC OCTOBRE</span><span class="heading-line"></span><span>01 — 03</span></div>
+    <div class="suggestions">
+      <button data-prompt="Bonjour Octobre, présente-toi en français."><span class="suggestion-visual" aria-hidden="true">✳</span><span class="suggestion-copy"><strong>Faire connaissance</strong><small>Découvrez votre assistant</small></span><span class="suggestion-arrow" aria-hidden="true">↗</span></button>
+      <button data-prompt="Liste les fichiers de mon dossier de travail autorisé."><span class="suggestion-visual" aria-hidden="true">▤</span><span class="suggestion-copy"><strong>Explorer mes fichiers</strong><small>Parcourir votre espace local</small></span><span class="suggestion-arrow" aria-hidden="true">↗</span></button>
+      <button data-prompt="Aide-moi à préparer un plan détaillé pour mon prochain projet."><span class="suggestion-visual" aria-hidden="true">◇</span><span class="suggestion-copy"><strong>Créer un projet</strong><small>Donner vie à une idée</small></span><span class="suggestion-arrow" aria-hidden="true">↗</span></button>
+    </div>
+  </div>
+</div>
+      </template>
+      <div class="composer-wrap"><div class="composer-overline"><span><i class="composer-asterisk">✳</i> VOTRE PROCHAINE IDÉE COMMENCE ICI</span><span class="composer-help">↵ Envoyer <span class="help-separator">·</span> ⇧↵ Ligne suivante</span></div><div class="composer"><textarea id="message-input" aria-label="Votre message à Octobre" placeholder="Demandez quelque chose à Octobre…" rows="2"></textarea><div id="attachment-status" class="muted"></div><div class="composer-actions"><select id="mode" aria-label="Mode de réponse"><option value="auto">Automatique</option><option value="reason">Approfondi</option><option value="code">Développement</option></select><div><button id="microphone" title="Dicter en français">🎙 Dicter</button><button id="capture-screen">▧ Capture</button><button id="attach-image">＋ Image</button><input id="image-file" type="file" accept="image/png,image/jpeg,image/webp" class="hidden"><label><input id="auto-speech" type="checkbox"> Parler</label><button id="read-answer" title="Relire avec la voix choisie">♫ Relire</button><button id="stop" class="hidden">Interrompre</button><button id="send" class="primary">Envoyer <span class="send-arrow" aria-hidden="true">↗</span></button></div></div></div><p class="footnote"><span class="footnote-symbol">◈</span> Traitement local <span class="footnote-separator">•</span> Fichiers récupérables</p></div>
+    </section>
+    <section id="page-missions" class="page hidden"><h2>Le travail en cours</h2><p class="muted">Retrouvez les étapes, les résultats et les erreurs de chaque demande.</p><div id="missions-list"></div></section>
+    <section id="page-projects" class="page hidden"><h2>Un espace de travail récupérable</h2><p class="muted">Les opérations sont limitées au dossier autorisé affiché ci-dessous. Les commandes arbitraires restent indisponibles.</p><p id="workspace-path" class="path"></p><div class="toolbar"><button id="list-files">Actualiser les fichiers</button><button id="index-files">Indexer cet espace</button></div><div id="files-list"></div><h3>Rechercher dans les textes indexés</h3><div class="toolbar"><input id="search-query" aria-label="Recherche locale" placeholder="Un mot, une idée…"><button id="search-files">Rechercher</button></div><div id="search-results"></div><h3>Historique et restauration</h3><div id="actions-list"></div></section>
+    <section id="page-voices" class="page hidden"><h2>Deux voix. Un seul Octobre.</h2><p class="muted">Les références restent sur ce PC. Corrigez la transcription, écoutez un aperçu, puis validez chaque voix séparément.</p><div id="voices-list" class="voice-grid"></div><label class="test-phrase">Phrase de test<textarea id="test-phrase" rows="3">Bonjour, je suis Octobre 1.0, l’intelligence artificielle de FREEV. Comment puis-je t’aider ?</textarea></label><p class="muted">Changer de voix conserve la conversation. La phrase déjà en lecture se termine avec sa voix actuelle.</p><audio id="audio" controls class="audio hidden"></audio></section>
+    <section id="page-tools" class="page hidden"><h2>Vos procédures réutilisables</h2><p class="muted">Préparez une procédure, relisez ses étapes, puis lancez-la. Les fichiers restent récupérables et les scripts s’exécutent dans un espace isolé.</p><div class="toolbar"><input id="skill-description" aria-label="Description de la procédure" placeholder="Ex. lister mes fichiers puis lire notes.txt"><button id="create-skill">Préparer avec Octobre</button><button id="macro-start">Enregistrer les prochaines actions</button><button id="macro-stop">Terminer l’enregistrement</button></div><div id="workflow-list"></div><details><summary>Importer une procédure au format JSON</summary><textarea id="workflow-json" rows="8" aria-label="Procédure JSON"></textarea><button id="import-workflow">Vérifier et enregistrer</button></details><h3>Connecteurs locaux</h3><p class="muted">Serveurs Python dans l’espace de travail. Le connecteur est isolé, sans réseau et avec les fichiers en lecture seule.</p><div class="toolbar"><input id="connector-name" aria-label="Nom du connecteur" placeholder="Nom"><input id="connector-path" aria-label="Chemin du serveur MCP" placeholder="Chemin du serveur .py"><button id="add-connector">Ajouter</button></div><div id="connector-list"></div><h3>Votre téléphone sur le réseau local</h3><p class="muted">L’accès est désactivé au départ. Une connexion chiffrée et un code temporaire sont requis. Le certificat local doit être approuvé sur votre appareil après vérification de son empreinte. L’essai sur un téléphone physique reste à réaliser.</p><div class="toolbar"><label><input id="remote-enabled" type="checkbox"> Activer l’accès local</label><button id="pair-code">Créer un code de 2 minutes</button><button id="download-cert">Exporter le certificat local</button></div><p id="pairing-code" class="path" aria-live="polite"></p><div id="remote-status"></div></section>
+    <section id="page-settings" class="page settings-page hidden" aria-labelledby="settings-title">
+      <h2 id="settings-title">Personnaliser Octobre</h2>
+      <div class="identity-settings">
+        <div class="identity-preview">
+          <div class="preview-stage"><div class="scene-orbit"></div><octobre-mascot id="mascot-preview" tabindex="-1" role="img" aria-label="Aperçu de la mascotte Octobre"></octobre-mascot></div>
+          <div class="preview-control"><label for="preview-state">Aperçu</label><select id="preview-state"><option value="idle">Au repos</option><option value="thinking">En réflexion</option><option value="answering">En réponse</option><option value="listening">À l’écoute</option><option value="speaking">En lecture</option><option value="ready">Terminé</option></select></div>
+        </div>
+        <div class="identity-controls">
+          <fieldset><legend>Style du personnage</legend>
+            <div class="style-options">
+              <label><input type="radio" name="mascot-style" value="ambre"><span class="style-swatch" data-preset="ambre"></span>Ambre</label>
+              <label><input type="radio" name="mascot-style" value="aurore"><span class="style-swatch" data-preset="aurore"></span>Aurore</label>
+              <label><input type="radio" name="mascot-style" value="encre"><span class="style-swatch" data-preset="encre"></span>Encre</label>
+              <label><input type="radio" name="mascot-style" value="porcelaine"><span class="style-swatch" data-preset="porcelaine"></span>Porcelaine</label>
+            </div>
+          </fieldset>
+          <div class="setting-row"><label for="mascot-effect">Animation de réflexion</label><select id="mascot-effect"><option value="orbit">Orbite</option><option value="wave">Ondulation</option><option value="pulse">Respiration</option></select></div>
+          <div class="setting-row"><label for="mascot-motion">Mouvement</label><select id="mascot-motion"><option value="full">Expressif</option><option value="quiet">Discret</option><option value="off">Désactivé</option></select></div>
+          <div class="setting-row"><label for="mascot-visible">Mascotte dans l’interface</label><input id="mascot-visible" type="checkbox"></div>
+          <button id="mascot-reset">Rétablir les réglages de la mascotte</button>
+        </div>
+      </div>
+      <h3>Apparence et lecture</h3><div class="toolbar"><label><input id="light-theme" type="checkbox"> Apparence claire</label><label>Débit de lecture <input id="speech-rate" type="number" min="0.7" max="1.4" step="0.05" value="1"></label><label>Volume <input id="speech-volume" type="range" min="0" max="1" step="0.05" value="1"></label></div>
+    </section>
+    <section id="page-health" class="page hidden"><h2>Un état vérifiable</h2><p class="muted">Un composant téléchargé n’est pas nécessairement testé. Les résultats indiquent les opérations réellement exécutées.</p><div class="toolbar"><button id="refresh-health">Actualiser</button><label><input type="checkbox" id="gaming"> Mode jeu manuel</label><label><input type="checkbox" id="image-compatibility"> Images : mode compatible 8 Go (plus lent)</label></div><div id="resource-cards" class="resource-grid"></div><h3>Composants de l’assistant</h3><div class="table-wrap"><table><thead><tr><th>Rôle</th><th>Composant</th><th>État réel</th><th>Vérification</th></tr></thead><tbody id="model-rows"></tbody></table></div><h3>État de la livraison</h3><p class="muted">FREEV Local et son module Octobre sont créés. La recette V1.4 et les optimisations restent en cours. Le contrôle libre du bureau et le terminal Windows ne sont pas exposés : la protection des fichiers doit rester imposée techniquement.</p><details><summary>Rapport de diagnostic</summary><pre id="health-report"></pre></details></section>
+  </main>
+</body>
+</html>

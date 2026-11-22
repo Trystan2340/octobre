@@ -1,0 +1,38 @@
+'use strict';
+function addVoiceLifecycle(card,profile,text){
+ const details=element('details');details.append(element('summary','Gérer cet extrait privé'));
+ const file=element('input');file.type='file';file.accept='audio/*,video/quicktime';file.setAttribute('aria-label','Nouvelle référence '+profile.label);
+ const rights=element('input');rights.type='checkbox';const label=element('label',' Je suis autorisé à utiliser cette nouvelle référence');label.prepend(rights);
+ const replace=element('button','Importer et conserver l’ancien extrait en quarantaine');replace.onclick=guarded(async()=>{if(!file.files[0])throw new Error('Choisissez un fichier audio.');if(!rights.checked)throw new Error('Confirmez votre droit d’usage.');const form=new FormData();form.append('profile',profile.id);form.append('transcript',text.value);form.append('consent','true');form.append('file',file.files[0]);const response=await fetch('/api/voices/import',{method:'POST',headers:{Authorization:'Bearer '+token},body:form});const data=await response.json();if(!response.ok)throw new Error(data.detail);await loadVoices();notice('Extrait importé. Confirmez sa transcription puis écoutez un nouvel aperçu.');});
+ const disable=element('button',profile.status==='disabled'?'Réactiver ce profil':'Désactiver ce profil');disable.onclick=guarded(async()=>{await api('voices/'+profile.id+'/enabled',{enabled:profile.status==='disabled'});await loadVoices();});
+ const remove=element('button','Retirer vers la quarantaine récupérable');remove.onclick=guarded(async()=>{const result=await api('voices/'+profile.id+'/remove',{});notice('Profil conservé en quarantaine. Vous pouvez le restaurer dans Projets et fichiers.');await loadVoices();});
+ details.append(file,label,replace,disable,remove);card.append(details);
+}
+async function authenticatedBlob(path){const response=await fetch('/api/'+path,{headers:{Authorization:'Bearer '+token}});if(!response.ok)throw new Error('Fichier indisponible');return URL.createObjectURL(await response.blob());}
+async function showArtifact(data,box){const key=data.image_id||data.video_id;if(!/^[a-f0-9]{32}$/.test(key||''))return;const media=element(data.video_id?'video':'img');media.src=await authenticatedBlob((data.video_id?'videos/':'images/')+key);media.alt='Création locale Octobre';if(data.video_id)media.controls=true;box.append(media);}
+async function loadTools(){
+ const workflows=await api('workflows');$('workflow-list').replaceChildren();
+ for(const item of workflows){const definition=JSON.parse(item.definition);const card=element('div',undefined,'card');card.append(element('h3',item.name));card.append(element('p',definition.steps.map((x,i)=>(i+1)+'. '+x.tool).join(' → '),'meta'));const fields={};
+ for(const [key,value]of Object.entries(definition.parameters||{})){const label=element('label',key+' ');const input=element('input');input.value=value;input.setAttribute('aria-label',key);label.append(input);card.append(label);fields[key]=input;}
+ const run=element('button','Exécuter');run.onclick=guarded(async()=>{const parameters=Object.fromEntries(Object.entries(fields).map(([key,input])=>[key,input.value]));await api('workflows/'+item.id+'/run',{parameters});showPage('missions');});card.append(run);
+ if(definition.interval_seconds||definition.watch_file){const schedule=element('button',item.enabled?'Suspendre le déclenchement':'Activer le déclenchement');schedule.onclick=guarded(async()=>{await api('workflows/'+item.id+'/enable',{enabled:!item.enabled});await loadTools();});card.append(schedule);}
+ const details=element('details');details.append(element('summary','Relire les étapes et leurs arguments'),element('pre',JSON.stringify(definition,null,2)));card.append(details);$('workflow-list').append(card);}
+ if(!workflows.length)$('workflow-list').append(element('p','Aucune procédure enregistrée.','muted'));
+ const connectors=await api('connectors');$('connector-list').replaceChildren();for(const item of connectors){const card=element('div',undefined,'card');card.append(element('p',item.name));const toggle=element('button',item.enabled?'Désactiver':'Activer');toggle.onclick=guarded(async()=>{await api('connectors/'+item.id+'/enabled',{enabled:!item.enabled});await loadTools();});const inventory=element('button','Découvrir les outils');const output=element('pre','');inventory.onclick=guarded(async()=>{output.textContent=JSON.stringify(await api('connectors/'+item.id+'/tools'),null,2);});card.append(toggle,inventory,output);$('connector-list').append(card);}
+ await loadRemote();loadPlayback();
+}
+async function loadRemote(){const result=await api('remote');$('remote-enabled').checked=result.enabled;$('remote-status').replaceChildren();for(const url of result.urls||[]){const p=element('p',url,'path');$('remote-status').append(p);}if(result.fingerprint_sha256)$('remote-status').append(element('p','Empreinte du certificat : '+result.fingerprint_sha256,'path'));for(const device of result.devices){const row=element('div',device.name+(device.revoked?' · révoqué':''),'result-row');if(!device.revoked){const revoke=element('button','Révoquer');revoke.onclick=guarded(async()=>{await api('remote/'+device.id+'/revoke',{});await loadRemote();});row.append(revoke);}$('remote-status').append(row);}}
+$('create-skill').onclick=guarded(async()=>{notice('Préparation de la procédure…');await api('skills/from-text',{description:$('skill-description').value});notice('Procédure enregistrée. Relisez ses étapes avant de l’exécuter.');await loadTools();});
+$('macro-start').onclick=guarded(async()=>{await api('macros/start',{description:$('skill-description').value||'Ma procédure'});notice('Les prochaines actions de fichiers et de tests isolés seront enregistrées.');});
+$('macro-stop').onclick=guarded(async()=>{await api('macros/stop',{});await loadTools();notice('Procédure conservée. Les textes et codes sont des paramètres à renseigner.');});
+$('import-workflow').onclick=guarded(async()=>{await api('workflows',JSON.parse($('workflow-json').value));await loadTools();});
+$('add-connector').onclick=guarded(async()=>{await api('connectors',{name:$('connector-name').value,script:$('connector-path').value});await loadTools();});
+$('remote-enabled').onchange=guarded(async()=>{try{await api('remote/enabled',{enabled:$('remote-enabled').checked});}finally{await loadRemote();}});
+$('pair-code').onclick=guarded(async()=>{const result=await api('remote/code',{});$('pairing-code').textContent='Code : '+result.code+' · valable 2 minutes, une seule utilisation';setTimeout(()=>{$('pairing-code').textContent='Code expiré. Créez un nouveau code si nécessaire.';},120000);});
+$('download-cert').onclick=guarded(async()=>{const url=await authenticatedBlob('remote/certificate');const a=element('a');a.href=url;a.download='Octobre-LAN.cer';a.click();setTimeout(()=>URL.revokeObjectURL(url),10000);});
+function loadPlayback(){const value=JSON.parse(localStorage.getItem('octobre-playback-'+$('voice-select').value)||'{}');$('speech-rate').value=value.rate||1;$('speech-volume').value=value.volume??1;}
+function savePlayback(){localStorage.setItem('octobre-playback-'+$('voice-select').value,JSON.stringify({rate:Number($('speech-rate').value),volume:Number($('speech-volume').value)}));}
+$('speech-rate').onchange=savePlayback;$('speech-volume').onchange=savePlayback;
+$('voice-select').addEventListener('change',loadPlayback);
+$('light-theme').checked=localStorage.getItem('octobre-theme')==='light';document.body.classList.toggle('light',$('light-theme').checked);
+$('light-theme').onchange=()=>{document.body.classList.toggle('light',$('light-theme').checked);localStorage.setItem('octobre-theme',$('light-theme').checked?'light':'dark');};
